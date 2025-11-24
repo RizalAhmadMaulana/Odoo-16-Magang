@@ -1,0 +1,150 @@
+
+def get_payload_old(self,barang):
+    user_cn = self.env.user.company_id.user_cn
+    password_cn = self.env.user.company_id.password_cn
+    user = user_cn + "^$" + password_cn
+    sign = self.env.user.company_id.token_cn
+    npwp = self.env.user.company_id.vat
+
+    cn = self.env['dps.cn.pibk'].sudo().search([('name','=',barang)])
+    log_obj = self.env['dps.file.kirim']
+    for rec in cn :
+        
+        hdr = """<HEADER>
+        <JNS_AJU>{rec.jenis_aju_id.name}</JNS_AJU>
+        <KD_JNS_PIBK>{rec.jenis_pibk_id.name}</KD_JNS_PIBK>
+        <KATEGORI_BARANG_KIRIMAN>{rec.kategori_barang_kiriman.name}</KATEGORI_BARANG_KIRIMAN>
+        <NO_BARANG>{rec.name}</NO_BARANG>
+        <KD_KANTOR>{rec.kode_kantor_id.name}</KD_KANTOR>
+        <KD_JNS_ANGKUT>{rec.kode_jenis_angkut_id.name}</KD_JNS_ANGKUT>
+        <NM_PENGANGKUT>{rec.nama_pengangkut}</NM_PENGANGKUT>
+        <NO_FLIGHT>{rec.no_voy_flight}</NO_FLIGHT>
+        <KD_PEL_MUAT>{rec.pelabuhan_muat_id.name}</KD_PEL_MUAT>
+        <KD_PEL_BONGKAR>{rec.pelabuhan_bongkar_id.name}</KD_PEL_BONGKAR>
+        <KD_GUDANG>{rec.gudang_id.name}</KD_GUDANG>
+        <NO_INVOICE>{rec.no_invoice or ''}</NO_INVOICE>
+        <TGL_INVOICE>{ctanggal(rec.tgl_invoice)}</TGL_INVOICE>
+        <KD_NEGARA_ASAL>{rec.negara_asal_id.name}</KD_NEGARA_ASAL>
+        <JML_BRG>{len(rec.barang_ids)}</JML_BRG>
+        <NO_BC11>{rec.no_bc11}</NO_BC11>
+        <TGL_BC11>{ctanggal(rec.tgl_bc11)}</TGL_BC11>
+        <NO_POS_BC11>{rec.no_pos}</NO_POS_BC11>
+        <NO_SUBPOS_BC11>{rec.no_subpos}</NO_SUBPOS_BC11>
+        <NO_SUBSUBPOS_BC11>{rec.no_sub_subpos}</NO_SUBSUBPOS_BC11>
+        <NO_MASTER_BLAWB>{rec.no_master}</NO_MASTER_BLAWB>
+        <TGL_MASTER_BLAWB>{ctanggal(rec.tgl_master)}</TGL_MASTER_BLAWB>
+        <NO_HOUSE_BLAWB>{rec.no_house}</NO_HOUSE_BLAWB>
+        <TGL_HOUSE_BLAWB>{ctanggal(rec.tgl_house)}</TGL_HOUSE_BLAWB>
+        <KD_NEG_PENGIRIM>{rec.negara_pengirim_id.name}</KD_NEG_PENGIRIM>
+        <NM_PENGIRIM>{rec.nama_pengirim}</NM_PENGIRIM>
+        <AL_PENGIRIM>{rec.alamat_pengirim}</AL_PENGIRIM>
+        <JNS_ID_PENGIRIM>{rec.jenis_id_pengirim.name}</JNS_ID_PENGIRIM>
+        <NO_ID_PENGIRIM>{rec.no_id_pengirim}</NO_ID_PENGIRIM>
+        <JNS_ID_PENERIMA>{rec.jenis_id_penerima.name}</JNS_ID_PENERIMA>
+        <NO_ID_PENERIMA>{rec.no_id_penerima}</NO_ID_PENERIMA>
+        <NM_PENERIMA>{rec.nama_penerima}</NM_PENERIMA>
+        <AL_PENERIMA>{rec.alamat_penerima}</AL_PENERIMA>
+        <TELP_PENERIMA>{rec.telp_penerima}</TELP_PENERIMA>
+        <JNS_ID_PEMBERITAHU>{rec.jenis_id_pemberitahu.name}</JNS_ID_PEMBERITAHU>
+        <NO_ID_PEMBERITAHU>{rec.no_id_pemberitahu}</NO_ID_PEMBERITAHU>
+        <NM_PEMBERITAHU>{rec.nama_pemberitahu}</NM_PEMBERITAHU>
+        <AL_PEMBERITAHU>{rec.alamat_pemberitahu}</AL_PEMBERITAHU>
+        <NO_IZIN_PEMBERITAHU>{rec.no_ijin_pemberitahu}</NO_IZIN_PEMBERITAHU>
+        <TGL_IZIN_PEMBERITAHU>{ctanggal(rec.tgl_ijin_pemberitahu)}</TGL_IZIN_PEMBERITAHU>
+        <NO_ID_PPMSE>{rec.id_ppmse if rec.id_ppmse else ""}</NO_ID_PPMSE>
+        <NM_PPMSE>{rec.nama_ppmse if rec.nama_ppmse else ""}</NM_PPMSE>
+        <KD_VAL>{rec.kode_valuta_id.name}</KD_VAL>
+        <NDPBM>{'%.4f'%rec.ndpbm}</NDPBM>
+        <FOB>{'%.2f'%rec.fob}</FOB>
+        <ASURANSI>{'%.2f'%rec.asuransi}</ASURANSI>
+        <FREIGHT>{'%.2f'%rec.freight}</FREIGHT>
+        <CIF>{'%.2f'%rec.cif}</CIF>
+        <NETTO>{'%.2f'%rec.netto}</NETTO>
+        <BRUTO>{'%.2f'%rec.brutto}</BRUTO>
+        <TOT_DIBAYAR>{'%.2f'%rec.total_dibayar}</TOT_DIBAYAR>
+        <NPWP_BILLING>{rec.npwp_billing}</NPWP_BILLING>
+        <NAMA_BILLING>{rec.nama_billing}</NAMA_BILLING>"""
+        
+        pung = ""
+        for p in rec.header_pungutan_ids :
+            pung += """<PUNGUTAN_TOTAL>
+            <KD_PUNGUTAN>{p.kode_pungutan_id.name}</KD_PUNGUTAN>
+            <NILAI>{'%.2f'%p.nilai_pungutan}</NILAI>
+            </PUNGUTAN_TOTAL>"""
+        pungutan = """<HEADER_PUNGUTAN>{pung}</HEADER_PUNGUTAN>"""
+        barang = ""
+        for b in rec.barang_ids :
+            if b.detail_pungutan_ids :
+                dpung = ""
+                for dp in b.detail_pungutan_ids :
+                    dpung += """<DETIL_PUNGUTAN>
+                    <KD_PUNGUTAN>{dp.kode_pungutan_id.name}</KD_PUNGUTAN>
+                    <NILAI>{'%.2f'%dp.nilai_pungutan}</NILAI>
+                    <KD_TARIF>{dp.kode_tarif.name if dp.kode_tarif.name else ""}</KD_TARIF>
+                    <KD_SAT_TARIF>{dp.kode_sat_tarif.name if dp.kode_sat_tarif.name else ""}</KD_SAT_TARIF>
+                    <JML_SAT>{'%.0f'%dp.jumlah_sat_tarif}</JML_SAT>
+                    <TARIF>{'%.2f'%dp.tarif}</TARIF>
+                    </DETIL_PUNGUTAN>"""
+
+            
+            # barang += """<BARANG>
+            <SERI_BRG>{b.name}</SERI_BRG>
+            <HS_CODE>{b.hscode}</HS_CODE>
+            <UR_BRG>{b.uraian_barang.replace("&","")}</UR_BRG>
+            <IMEI1>{b.imei1 if b.imei1 else ""}</IMEI1>
+            <IMEI2>{b.imei2 if b.imei2 else ""}</IMEI2>
+            <KD_NEG_ASAL>{b.negara_asal_barang_id.name}</KD_NEG_ASAL>
+            <JML_KMS>{'%.0f'%b.jumlah_kemasan}</JML_KMS>
+            <JNS_KMS>{b.jenis_kemasan_id.name}</JNS_KMS>
+            <CIF>{'%.2f'%b.cif}</CIF>
+            <KD_SAT_HRG>{b.kode_sat_harga.name if b.kode_sat_harga.name else ""}</KD_SAT_HRG>
+            <JML_SAT_HRG>{'%.0f'%b.jumlah_sat_harga}</JML_SAT_HRG>
+            <FL_BEBAS>{"1" if b.flag_bebas else "0"}</FL_BEBAS>
+            <NO_SKEP>{b.no_skep_bebas if b.no_skep_bebas else ""}</NO_SKEP>
+            <TGL_SKEP>{ctanggal(b.tgl_skep_bebas)}</TGL_SKEP>{dpung}</BARANG>"""
+            # skep baru
+            barang += """<BARANG>
+            <SERI_BRG>{b.name}</SERI_BRG>
+            <HS_CODE>{b.hscode}</HS_CODE>
+            <UR_BRG>{b.uraian_barang.replace("&","")}</UR_BRG>
+            <KONDISI_BRG>{b.kondisi_barang}</KONDISI_BRG>
+            <IMEI1>{b.imei1 if b.imei1 else ""}</IMEI1>
+            <IMEI2>{b.imei2 if b.imei2 else ""}</IMEI2>
+            <KD_NEG_ASAL>{b.negara_asal_barang_id.name}</KD_NEG_ASAL>
+            <JML_KMS>{'%.0f'%b.jumlah_kemasan}</JML_KMS>
+            <JNS_KMS>{b.jenis_kemasan_id.name}</JNS_KMS>
+            <CIF>{'%.2f'%b.cif}</CIF>
+            <KD_SAT_HRG>{b.kode_sat_harga.name if b.kode_sat_harga.name else ""}</KD_SAT_HRG>
+            <JML_SAT_HRG>{'%.0f'%b.jumlah_sat_harga}</JML_SAT_HRG>
+            <FL_BEBAS>{"1" if b.flag_bebas else "0"}</FL_BEBAS>
+            <NO_SKEP>{b.no_skep_bebas if b.no_skep_bebas else ""}</NO_SKEP>
+            <TGL_SKEP>{ctanggal(b.tgl_skep_bebas)}</TGL_SKEP>{dpung}</BARANG>"""
+        detil = """<DETIL>{barang}</DETIL>"""
+            
+        allcn = """<CN_PIBK>{hdr}{pungutan}{detil}</HEADER>
+        </CN_PIBK>"""
+        val_log = {
+                'proses' : 'Kirim CN / PIBK',
+                'name' : rec.name ,
+                'isi' : allcn,
+            }     
+        new_log = log_obj.sudo().create(val_log)
+        allcn = html.escape(allcn.replace('\n', ' '))
+
+    user_cn = self.env.user.company_id.user_cn
+    password_cn = self.env.user.company_id.password_cn
+    user = user_cn + "^$" + password_cn
+    sign = self.env.user.company_id.token_cn
+
+    SOAPEnvelope = """<?xml version="1.0" encoding="UTF-8"?>
+                        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://service.pibk.go.id/">
+                            <SOAP-ENV:Body>
+                                <ns1:kirimData>
+                                    <data>{allcn}</data>
+                                    <id>{user}</id>
+                                    <sign>{sign}</sign>
+                                </ns1:kirimData>
+                            </SOAP-ENV:Body>
+                        </SOAP-ENV:Envelope>"""
+    
+    return SOAPEnvelope

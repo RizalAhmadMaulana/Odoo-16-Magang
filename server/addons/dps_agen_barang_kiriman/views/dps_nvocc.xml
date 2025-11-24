@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_nvocc_manifes" model="ir.actions.act_window">
+            <field name="name">Manifest NVOCC</field>
+            <field name="res_model">dps.nvocc</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Buat Manifest Induk NVOCC baru.</p>
+            </field>
+        </record>
+        
+        <record id="action_nvocc_host_bl" model="ir.actions.act_window">
+            <field name="name">Data B/L</field>
+            <field name="res_model">dps.nvocc.bl</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_nvocc_master_bl" model="ir.actions.act_window">
+            <field name="name">Master B/L</field>
+            <field name="res_model">dps.nvocc.master.bl</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_nvocc_kelompok_pos" model="ir.actions.act_window">
+            <field name="name">Kelompok Pos</field>
+            <field name="res_model">dps.nvocc.kelompok.pos</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_nvocc_hs_code" model="ir.actions.act_window">
+            <field name="name">Detil HS Code</field>
+            <field name="res_model">dps.nvocc.bl.hs</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_nvocc_petikemas" model="ir.actions.act_window">
+            <field name="name">Detil Petikemas Terangkut</field>
+            <field name="res_model">dps.nvocc.container</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="dps_nvocc_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.tree</field>
+            <field name="model">dps.nvocc</field>
+            <field name="arch" type="xml">
+                <tree string="Manifest NVOCC">
+                    <field name="kode_kantor" />
+                    <field name="nomor_aju"/>
+                    <field name="mode_pengangkut"/>
+                    <field name="nama_sarana_pengangkut"/>
+                    <field name="nama_perusahaan" />
+                    <field name="nomor_voyage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_view_form" model="ir.ui.view">
+            <field name="name">dps.nvocc.form</field>
+            <field name="model">dps.nvocc</field>
+            <field name="arch" type="xml">
+                <form string="Manifest NVOCC">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="kode_kantor" readonly="1"/></h1>
+                        </div>
+                        <group string="Informasi Dasar Manifest">
+                            <group>
+                                <field name="nomor_aju"/>
+                                <field name="nomor_voyage"/>
+                                <field name="nama_sarana_pengangkut"/>
+                                <field name="imo_number"/>
+                                <field name="kode_kantor" required="1"/>
+                                <field name="jenis_manifes" required="1"/>
+                                <field name="asal_data" required="1"/>
+                            </group>
+                            <group>
+                                <field name="tanggal_berangkat"/>
+                                <field name="tanggal_tiba"/>
+                                <field name="mode_pengangkut"/>
+                                <field name="kode_negara"/>
+                                <field name="id_perusahaan" required="1"/>
+                                <field name="nama_perusahaan" required="1"/>
+                                <field name="alamat_perusahaan" required="1"/>
+                                <field name="fl_waktu_tempuh" required="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Kelompok Pos">
+                                <field name="data_kelompok_pos_ids" mode="tree,form" nolabel="1" context="{'default_nvocc_id': active_id}">
+                                    <tree>
+                                        <field name="kode_kelompok_pos"/>
+                                        <field name="jumlah"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            
+                            <page string="Master B/L">
+                                <field name="master_bl_ids">
+                                    <tree editable="bottom">
+                                        <field name="kelompok_pos"/>
+                                        <field name="master_bl"/>
+                                        <field name="tanggal_bl"/>
+                                        <field name="jumlah_pos"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            
+                            <page string="Detil B/L (Host B/L)">
+                                <field name="data_bl_ids" mode="tree,form" nolabel="1" context="{'default_nvocc_id': active_id}">
+                                    <tree>
+                                        <field name="kode_kelompok_pos"/>
+                                        <field name="nomor_host_bl"/>
+                                        <field name="nama_penerima"/>
+                                        <field name="berat"/>
+                                        <field name="jumlah_container"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_kelompok_pos_view_form" model="ir.ui.view">
+            <field name="name">dps.nvocc.kelompok.pos.form</field>
+            <field name="model">dps.nvocc.kelompok.pos</field>
+            <field name="arch" type="xml">
+                <form string="Kelompok Pos Detil">
+                    <sheet>
+                        <group>
+                            <field name="kode_kelompok_pos" required="1"/>
+                            <field name="jumlah"/>
+                            <field name="nvocc_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="dps_nvocc_kelompok_pos_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.kelompok.pos.tree</field>
+            <field name="model">dps.nvocc.kelompok.pos</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="kode_kelompok_pos"/>
+                    <field name="jumlah"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_bl_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.bl.tree</field>
+            <field name="model">dps.nvocc.bl</field>
+            <field name="arch" type="xml">
+                <tree string="Data B/L Detil">
+                    <field name="nomor_host_bl"/>
+                    <field name="nomor_bl"/>
+                    <field name="tanggal_host_bl"/>
+                    <field name="nama_penerima"/>
+                    <field name="berat"/>
+                    <field name="jumlah_container"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_bl_view_form" model="ir.ui.view">
+            <field name="name">dps.nvocc.bl.form</field>
+            <field name="model">dps.nvocc.bl</field>
+            <field name="arch" type="xml">
+                <form string="Detil B/L">
+                    <sheet>
+                        <group string="Referensi B/L">
+                            <group>
+                                <field name="kelompok_pos_id"/> 
+                                <field name="kode_kelompok_pos" readonly="1"/>
+                                <field name="nomor_host_bl"/>
+                                <field name="tanggal_host_bl"/>
+                                <field name="nomor_bl"/>
+                                <field name="tanggal_bl"/>
+                            </group>
+                            <group>
+                                <field name="nomor_pos"/>
+                                <field name="kode_pelabuhan_asal"/>
+                                <field name="kode_pelabuhan_bongkar"/>
+                                <field name="kode_pelabuhan_transit"/>
+                                <field name="kode_pelabuhan_akhir"/>
+                                <field name="jumlah_container_tertinggal"/>
+                                <field name="jumlah_kemasan_tertinggal"/>
+                                <field name="jumlah_kemasan_terangkut"/>
+                                <field name="flag_konsolidasi"/>
+                                <field name="flag_parsial"/>
+                                <field name="flag_partof"/>
+                            </group>
+                        </group>
+
+                        <group string="Pihak Terkait">
+                            <group>
+                                <field name="nama_pengirim"/>
+                                <field name="alamat_pengirim"/>
+                                <field name="npwp_pengirim"/>
+                            </group>
+                            <group>
+                                <field name="nama_penerima"/>
+                                <field name="alamat_penerima"/>
+                                <field name="npwp_penerima"/>
+                            </group>
+                            <group>
+                                <field name="nama_notify"/>
+                                <field name="alamat_notify"/>
+                                <field name="npwp_notify"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Detail Barang &amp; Container">
+                                <group>
+                                    <group>
+                                        <field name="berat"/>
+                                        <field name="dimensi"/>
+                                        <field name="jumlah_kemasan"/>
+                                        <field name="jenis_kemasan"/>
+                                    </group>
+                                    <group>
+                                        <field name="jumlah_container"/>
+                                        <field name="mother_vessel"/>
+                                        <field name="marking"/>
+                                    </group>
+                                </group>
+                                
+                                <separator string="Detil Container Terangkut"/>
+                                <field name="bl_petikemas_terangkut_ids" mode="tree,form" nolabel="1" context="{'default_bl_id': active_id}">
+                                    <tree>
+                                        <field name="nomor_container"/>
+                                        <field name="ukuran_container"/>
+                                        <field name="nomor_segel"/>
+                                        <field name="jenis_container"/>
+                                    </tree>
+                                </field>
+                                
+                                <separator string="Detil HS Code"/>
+                                <field name="bl_hs_ids" mode="tree,form" nolabel="1" context="{'default_bl_id': active_id}">
+                                    <tree>
+                                        <field name="kode_hs"/>
+                                        <field name="uraian_barang"/>
+                                        <field name="seri_hs" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_kelompok_pos_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.kelompok.pos.tree</field>
+            <field name="model">dps.nvocc.kelompok.pos</field>
+            <field name="arch" type="xml">
+                <tree string="Kelompok Pos">
+                    <field name="kode_kelompok_pos" />
+                    <field name="jumlah" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_master_bl_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.master.bl.tree</field>
+            <field name="model">dps.nvocc.master.bl</field>
+            <field name="arch" type="xml">
+                <tree string="Master B/L">
+                    <field name="master_bl" />
+                    <field name="kelompok_pos" />
+                    <field name="tanggal_bl" />
+                    <field name="jumlah_pos" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_hs_code_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.bl.hs.tree</field>
+            <field name="model">dps.nvocc.bl.hs</field>
+            <field name="arch" type="xml">
+                <tree string="Detil HS Code">
+                    <field name="seri_hs"/>
+                    <field name="kode_hs"/>
+                    <field name="uraian_barang"/>
+                    <field name="bl_id"/> 
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_nvocc_container_view_tree" model="ir.ui.view">
+            <field name="name">dps.nvocc.container.tree</field>
+            <field name="model">dps.nvocc.container</field>
+            <field name="arch" type="xml">
+                <tree string="Detil Petikemas Terangkut">
+                    <field name="nomor_container"/>
+                    <field name="ukuran_container"/>
+                    <field name="type_container"/>
+                    <field name="nomor_segel"/>
+                    <field name="jenis_container"/> 
+                    <field name="fl_terangkut"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

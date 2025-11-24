@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_root_dpm" name="DPM FIK UDINUS" web_icon="dpm_fik_udinus, static/description/icon.png"> 
+        <menuitem id="menu_kepengurusan_dpm" name="Kepengurusan" action="dpm_fik_udinus.action_kepengurusan"/>
+        <menuitem id="menu_propo_dpm" name="Proposal" action="dpm_fik_udinus.action_proposal"/>
+        <menuitem id="menu_lpj_dpm" name="LPJ" action="dpm_fik_udinus.action_lpj"/>
+        <menuitem id="menu_setting_dpm" name="Setting">
+            <menuitem id="menu_setting_status" name="Status" action="dpm_fik_udinus.action_status"/>
+            <menuitem id="menu_setting_komisi" name="Komisi" action="dpm_fik_udinus.action_komisi"/>
+            <menuitem id="menu_setting_proker" name="Program Kerja" action="dpm_fik_udinus.action_proker"/>
+            <menuitem id="menu_setting_periode" name="Periode" action="dpm_fik_udinus.action_periode"/>
+            <menuitem id="menu_setting_sie" name="Struktur Sie" action="dpm_fik_udinus.action_sie"/>
+        </menuitem>
+    </menuitem>
+</odoo>

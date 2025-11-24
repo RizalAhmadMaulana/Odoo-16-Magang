@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_kepengurusan" model="ir.actions.act_window">
+            <field name="name">Kepengurusan DPM FIK</field>
+            <field name="res_model">kepengurusan.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Masukkan Data Kepengurusan Anda
+                </p>
+            </field>
+        </record>
+
+        <record id="view_kepengurusan_tree" model="ir.ui.view">
+            <field name="name">Kepengurusan DPM FIK</field>
+            <field name="model">kepengurusan.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nama_lengkap"/>
+                    <field name="email" />
+                    <field name="nim_anggota"/>
+                    <field name="jabatan" />
+                    <field name="id_periode" />
+                    <field name="id_komisi" />
+                    <field name="id_status" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_kepengurusan_form" model="ir.ui.view">
+            <field name="name">Kepengurusan DPM FIK</field>
+            <field name="model">kepengurusan.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="nama_lengkap"/>
+                                <field name="email" />
+                                <field name="nim_anggota"/>
+                                <field name="jabatan" />
+                            </group>
+                            <group>
+                                <field name="id_periode" />
+                                <field name="id_komisi" />
+                                <field name="id_status" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

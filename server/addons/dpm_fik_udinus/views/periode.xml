@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="action_periode" model="ir.actions.act_window">
+            <field name="name">Periode</field>
+            <field name="res_model">periode.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Tambahkan Periode Dalam DPM FIK
+                </p>
+            </field>
+        </record>
+
+        <record id="view_periode_tree" model="ir.ui.view">
+            <field name="name">Periode</field>
+            <field name="model">periode.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="periode"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_periode_form" model="ir.ui.view">
+            <field name="name">Periode</field>
+            <field name="model">periode.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="periode"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

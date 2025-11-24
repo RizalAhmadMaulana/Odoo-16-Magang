@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="dps_barkir_order_tree">
+            <field name="name">dps.barkir.order.tree</field>
+            <field name="model">dps.barkir.order</field>
+            <field name="arch" type="xml">
+                <tree default_order="name asc">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="ukuran_kemasan_id"/>
+                    <field name="biaya_pengiriman"/>
+                    <field name="jenis_id_pengirim" />
+                    <field name="id_pengirim"/>
+                    <field name="nama_pengirim"/>
+                    <field name="nomor_telepon_pengirim"/>
+                    <field name="total_kemasan" />
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="dps_barkir_order_form">
+            <field name="name">dps.barkir.order.form</field>
+            <field name="model">dps.barkir.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_draft" string="Reset ke Draft" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('draft', 'cancel'))]}"/>
+                        <button name="action_submit" string="Submit" type="object" attrs="{'invisible': [('state', 'in', ('submit', 'cancel'))]}" />
+                        <button name="print_barcode" attrs="{'invisible': [('state', 'not in', ('submit'))]}" string="Print Barcode" type="object" class="oe_highlight" />
+                        <button string="Create Invoice" name="action_create_invoice" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submit')]}" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <h1 class="d-none d-md-block">
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="partner_id" required="1"/>
+                                <field name="ukuran_kemasan_id" required="1"/>
+                                <field name="biaya_pengiriman" readonly="1"/>
+                                <field name="invoice_id" attrs="{'invisible': [('invoice_id', '=', False)]}"/>
+                                <field name="company_id_agen" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Pengirim">
+                                <group>
+                                    <group>
+                                        <label for="jenis_id_pengirim" string="ID Pengirim" />
+                                        <div>
+                                            <field name="jenis_id_pengirim" options="{'no_open': True, 'no_create': True}" style="width: 40%;margin-right:10px;" 
+                                                attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
+                                            <field name="id_pengirim" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        </div>
+                                        <field name="nama_pengirim" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="negara_pengirim" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="alamat_pengirim" widget="text" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field string="No Hp Pengirim" name="nomor_telepon_pengirim" widget="phone" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Penerima">
+                                <group>
+                                    <group>
+                                        <label for="jenis_id_penerima" string="ID Penerima"/>
+                                        <div>
+                                            <field name="jenis_id_penerima" options="{'no_open': True, 'no_create': True}" style="width: 40%;margin-right:10px;" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                            <field name="id_penerima" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        </div>
+                                        <field name="nama_penerima" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="alamat_penerima" widget="text" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field string="No Hp Penerima" name="nomor_telepon_penerima" widget="phone" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="provinsi_penerima" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="kota_penerima" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                        <field name="negara_penerima" readonly="1" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Detil Kemasan">
+                                <field name="kemasan_ids" options="{'create_text': 'Tambah Kemasan'}" context="{
+                                            'default_jenis_id_penerima':jenis_id_penerima,
+                                            'default_id_penerima':id_penerima,
+                                            'default_nama_penerima':nama_penerima,
+                                            'default_alamat_penerima':alamat_penerima,
+                                            'default_kota_penerima':kota_penerima,
+                                            'default_provinsi_penerima':provinsi_penerima,
+                                            'default_negara_penerima':negara_penerima,
+                                            'default_nomor_telepon_penerima':nomor_telepon_penerima,
+                                        }" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="dps_barkir_order_action">
+            <field name="name">Order Kiriman</field>
+            <field name="res_model">dps.barkir.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="dps_barkir_order_tree"/>
+        </record>
+    </data>
+</odoo>

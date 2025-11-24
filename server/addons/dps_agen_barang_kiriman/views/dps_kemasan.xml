@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="dps_barkir_kemasan_tree">
+            <field name="name">dps.barkir.kemasan.tree</field>
+            <field name="model">dps.barkir.kemasan</field>
+            <field name="arch" type="xml">
+                <!-- <search>
+                    <field name="name"/>
+                    <field name="id_pengirim"/>
+                    <field name="nama_pengirim"/>
+                    <field name="alamat_pengirim"/>
+                    <field name="nomor_telepon_pengirim"/>
+                </search> -->
+                <tree default_order="name asc">
+                    <field name="name"/>
+                    <field name="ukuran_kemasan"/>
+                    <field name="nama_penerima"/>
+                    <field name="provinsi_penerima"/>
+                    <field name="nomor_telepon_penerima"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="dps_barkir_kemasan_form">
+            <field name="name">dps.barkir.kemasan.form</field>
+            <field name="model">dps.barkir.kemasan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <h1 class="d-none d-md-block">
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <separator string="Penerima" colspan="4"/>
+                                <label for="jenis_id_penerima" string="Id Penerima"/>
+                                <div>
+                                    <field name="jenis_id_penerima" options="{'no_open': True, 'no_create': True}" style="width: 35%;margin-right:10px;"/>
+                                    <field name="id_penerima" style="width: 60%"/>
+                                </div>
+                                <field name="nama_penerima"/>
+                                <field name="alamat_penerima"/>
+                                <field name="nomor_telepon_penerima"/>
+                                <field name="provinsi_penerima" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="kota_penerima" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="negara_penerima" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+                            </group>
+                            <group>
+                                <separator string="Detail Kemasan" colspan="4"/>
+                                <field name="ukuran_kemasan" options="{'no_open': True, 'no_create': True}" />
+                                <field name="bruto"/>
+                                <field name="netto"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail Barang">
+                                <field name="barang_ids">
+                                    <tree editable="bottom" create="1" edit="1">
+                                        <field name="kategori_barang_id" options="{'no_open': True, 'no_create': True}" />
+                                        <field name="product_id"/>
+                                        <field name="uraian_barang"/>
+                                        <field name="jumlah_barang"/>
+                                    </tree>
+                                </field>    
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="dps_barkir_kemasan_action">
+            <field name="name">Kemasan</field>
+            <field name="res_model">dps.barkir.kemasan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="dps_barkir_kemasan_tree"/>
+        </record>
+
+    </data>
+</odoo>
+

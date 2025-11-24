@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="dps_agen_barkir_tree">
+            <field name="name">dps.agen.barkir.tree</field>
+            <field name="model">dps.agen.barkir</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="nama_agen"/>
+                    <field name="alamat_agen"/>
+                    <field name="kota_agen"/>
+                    <field name="provinsi_agen"/>
+                    <field name="negara_agen"/>
+                    <field name="nomor_telepon_agen"/>
+                    <field name="email_agen"/>
+                    <field name="website_agen"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="dps_agen_barkir_form">
+            <field name="name">dps.agen.barkir.form</field>
+            <field name="model">dps.agen.barkir</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="nama_agen"/>
+                                <field name="alamat_agen"/>
+                                <field name="kota_agen"/>
+                                <field name="provinsi_agen"/>
+                                <field name="negara_agen"/>
+                                <field name="nomor_telepon_agen"/>
+                                <field name="email_agen"/>
+                                <field name="website_agen"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="dps_agen_barkir_action">
+            <field name="name">Reference Agen</field>
+            <field name="res_model">dps.agen.barkir</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

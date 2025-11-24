@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="report.paperformat" id="barcode_paperformat">
+            <field name="name">Kertas Barcode</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_width">80</field>
+            <field name="page_height">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">4</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+        <report
+            id="barcode_report_qweb"
+            string="Print Barcode Kemasan"
+            model="dps.barkir.order"
+            report_type="qweb-pdf"
+            name="dps_agen_barang_kiriman.print_barcode_report_view"
+            file="dps_agen_barang_kiriman.barcode"
+            paperformat="dps_agen_barang_kiriman.barcode_paperformat"
+        />
+    </data>
+</odoo>

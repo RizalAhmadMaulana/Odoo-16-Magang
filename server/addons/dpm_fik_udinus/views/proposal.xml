@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_proposal" model="ir.actions.act_window">
+            <field name="name">Proposal</field>
+            <field name="res_model">proposal.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Masukkan Data Proposal Anda
+                </p>
+            </field>
+        </record>
+
+        <record id="view_proposal_tree" model="ir.ui.view">
+            <field name="name">Proposal</field>
+            <field name="model">proposal.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tempat"/>
+                    <field name="tema" />
+                    <field name="tgl_mulai" />
+                    <field name="tgl_selesai" />
+                    <field name="waktu_mulai" />
+                    <field name="id_proker"/>
+                    <field name="id_komisi" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_proposal_form" model="ir.ui.view">
+            <field name="name">Proposal</field>
+            <field name="model">proposal.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tgl_mulai" />
+                                <field name="lama_pelaksanaan"/>
+                                <field name="tgl_selesai" />
+                                <field name="waktu_mulai" />
+                            </group>
+                            <group>
+                                <field name="tempat"/>
+                                <field name="tema" />
+                                <field name="angka_pertama" />
+                                <field name="angka_kedua" />
+                                <field name="total" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Identitas">
+                                <group>
+                                    <field name="id_proker" />
+                                    <field name="id_komisi" />
+                                </group>
+                            </page>
+                            <page string="Isi">
+                                <group>
+                                    <field name="maksud_tujuan" />
+                                    <field name="latarBelakang" />
+                                    <field name="dasarPenyelenggaraan" />
+                                    <field name="penutup" /> 
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

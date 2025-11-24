@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="dps_barkir_shipment_tree">
+            <field name="name">dps.barkir.shipment.tree</field>
+            <field name="model">dps.barkir.shipment</field>
+            <field name="arch" type="xml">
+                <tree default_order="name asc">
+
+
+                    <field name="name"/>
+                    <field name="tgl_master" />
+                    <field name="nama_pengangkut" />
+
+                    <field name="estimated_arrival" />
+                    <field name="estimated_departure" />
+
+
+                    <field name="pelabuhan_muat_id" />
+
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="dps_barkir_shipment_form">
+            <field name="name">dps.barkir.shipment.form</field>
+            <field name="model">dps.barkir.shipment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_send_to_pjt" type="object" string="Send To PJT" class="btn-info" attrs="{'invisible': [('toggle_pjt', '=', True)]}" />
+                        <button name="action_submit" type="object" string="Submit" class="btn-info" attrs="{'invisible':[('state', 'not in', ('draft'))]}" />
+                        <button name="action_shipment" type="object" string="Berangkat" class="btn-info" attrs="{'invisible':[('state', 'not in', ('submit'))]}" />
+
+
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="toggle_pjt" invisible="1" />
+                            <field name="name" />
+                            <field name="tgl_master" />
+                            <field name="nama_pengangkut" />
+                            <field name="callsign" />
+                            <field name="negara_asal_id" options="{'no_open': True, 'no_create': True}" />
+                            <field name="no_voy_flight" />
+                            <field name="estimated_arrival" />
+                            <field name="estimated_departure" />
+                            <field name="pelabuhan_muat_id" options="{'no_open': True, 'no_create': True}" />
+                            <field name="pelabuhan_transit_id" options="{'no_open': True, 'no_create': True}" />
+                            <field name="pelabuhan_bongkar_id" options="{'no_open': True, 'no_create': True}" />
+                        </group>
+                        <notebook>
+                            <page string="Detail Barang">
+                                <field name="container_ids" widget="many2many" domain="[('state', '=', 'loading')]" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="dps_barkir_shipment_action">
+            <field name="name">Shipment</field>
+            <field name="res_model">dps.barkir.shipment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="dps_barkir_shipment_tree"/>
+        </record>
+
+    </data>
+</odoo>
+

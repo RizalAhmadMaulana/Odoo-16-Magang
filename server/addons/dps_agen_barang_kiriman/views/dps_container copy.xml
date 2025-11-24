@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- List View -->
+        <record model="ir.ui.view" id="dps_barkir_container_tree">
+            <field name="name">dps.barkir.container.tree</field>
+            <field name="model">dps.barkir.container</field>
+            <field name="arch" type="xml">
+                <!-- <search>
+                    <field name="name"/>
+                    <field name="id_pengirim"/>
+                    <field name="nama_pengirim"/>
+                    <field name="alamat_pengirim"/>
+                    <field name="nomor_telepon_pengirim"/>
+                </search> -->
+                <tree default_order="name asc">
+                    <field name="name"/>
+                    <field name="ukuran_container"/>
+                    <field name="jenis_container"/>
+                    <field name="no_segel"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="dps_barkir_container_form">
+            <field name="name">dps.barkir.container.form</field>
+            <field name="model">dps.barkir.container</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Loading" name="action_loading" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('draft'))]}" />
+                        <button string="Selesai Loading" name="action_shipment" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('stuffing'))]}" />
+                        <!-- <button string="Set Arrived" name="action_shipment" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('draft', 'on_shipment', 'arrived', 'delivered', 'cancel'))]}" /> -->
+                        
+
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <h1 class="d-none d-md-block">
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <group>
+                            <separator string="Detail Kontainer" colspan="4"/>
+                            <field name="shipment_id"/>
+                            <field name="name" string="Nomor Kontainer"/>
+                            <field name="ukuran_container" options="{'no_open': True, 'no_create': True}" />
+                            <field name="jenis_container" options="{'no_open': True, 'no_create': True}" />
+                            <field name="no_segel"/>
+                            <field name="note"/>
+                        </group>
+                        <!-- <notebook>
+                            <page string="Detail Kemasan"> -->
+                                <field name="kemasan_ids" widget="many2many" options="{'no_open': True, 'no_create': True}" />
+                                <!-- <field name="kemasan_ids" 
+                                    domain="[('state', 'in', ['submit'])]"
+                                    mode="tree" > -->
+                                    <!-- <tree string="Lines"
+                                        create="1"
+                                        editable="bottom"
+                                        delete="1">
+                                        <field name="name" />
+                                    </tree> -->
+                                <!-- </field> -->
+
+
+                                 <!-- options="{'create_edit': False}" 
+                                 /> -->
+                                    <!-- <tree>
+                                        <field name="name" string="No Resi / Kemasan" readonly="1" />
+                                        <field name="order_id">
+                                            <field name="id_pengirim" />
+                                        </field>
+                                        <field name="nama_penerima" readonly="1" />
+                                    </tree> -->
+                                <!-- </field>       -->
+                            <!-- </page>
+                        </notebook> -->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="dps_barkir_container_action">
+            <field name="name">Kontainer</field>
+            <field name="res_model">dps.barkir.container</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="dps_barkir_container_tree"/>
+        </record>
+
+    </data>
+</odoo>
+

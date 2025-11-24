@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_no_resi" model="ir.sequence">
+            <field name="name">No Resi</field>
+            <field name="code">no.resi</field>
+            <field name="prefix">RESI/%(year)s/%(month)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_partner_code" model="ir.sequence">
+            <field name="name">Partner Code</field>
+            <field name="code">dps.partner.code</field>
+            <field name="prefix">PART/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_no_kemasan" model="ir.sequence">
+            <field name="name">No Kemasan</field>
+            <field name="code">no.kemasan</field>
+            <field name="prefix">KMS/%(year)s/%(month)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="ir_sequence_nvocc" model="ir.sequence">
+            <field name="name">NVOCC Manifest</field>
+            <field name="code">dps.nvocc</field>
+            <field name="prefix">NVOCC/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_lpj" model="ir.actions.act_window">
+            <field name="name">LPJ</field>
+            <field name="res_model">lpj.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Masukkan Hasil LPJ Anda
+                </p>
+            </field>
+        </record>
+
+        <record id="view_lpj_tree" model="ir.ui.view">
+            <field name="name">LPJ</field>
+            <field name="model">lpj.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="hasil"/>
+                    <field name="waktu_realisasi"/>
+                    <field name="keterangan_acara" />
+                    <field name="realisasi_dana" />
+                    <field name="dana" />
+                    <field name="item" />
+                    <field name="jumlah" />
+                    <field name="harga" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lpj_form" model="ir.ui.view">
+            <field name="name">LPJ</field>
+            <field name="model">lpj.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="hasil"/>
+                            <field name="waktu_realisasi"/>
+                            <field name="keterangan_acara" />
+                            <field name="realisasi_dana" />
+                            <field name="dana" />
+                            <field name="item" />
+                            <field name="jumlah" />
+                            <field name="harga" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

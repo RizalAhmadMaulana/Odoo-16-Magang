@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="estate_property_type_tree_view" model="ir.ui.view">
+            <field name="name">estate.property.type.tree</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="estate_property_type_form_view" model="ir.ui.view">
+            <field name="name">estate.property.type.view</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_property_type" model="ir.actions.act_window">
+            <field name="name">Property Type</field> <!-- Digunakan untuk menampilkan teks dengan nama Property, bsa diganti -->
+            <field name="res_model">estate.property.type</field> <!-- Mengacu pada model yang ada di models/property.py -->
+            <field name="view_mode">tree,form</field> <!-- Digunakan untuk mengatur mode tampilan, form untuk menambah dan mengedit, tree untuk menampilkan -->
+            <field name="view_id" ref="estate_property_type_tree_view" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Create a Property to Advertise
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

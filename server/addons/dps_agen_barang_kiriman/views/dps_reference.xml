@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="dps_reference_agen_tree">
+            <field name="name">dps.reference.agen.tree</field>
+            <field name="model">dps.reference.agen</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="kode_reff"/>
+                    <field name="uraian"/>
+                    <field name="kode_master"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="dps_reference_agen_form">
+            <field name="name">dps.reference.agen.form</field>
+            <field name="model">dps.reference.agen</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="kode_reff"/>
+                                <field name="uraian"/>
+                                <field name="kode_master" force_save="1" readonly="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action 
+            NEGARA
+            KOTA
+            PROVINSI
+            PELABUHAN
+            JENIS_IDENTITAS
+            UKURAN_CONTAINER
+            JENIS_CONTAINER
+            UKURAN_KEMASAN
+            KATEGORI_BARANG
+        -->
+
+        <!-- Action: NEGARA -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_negara_action">
+            <field name="name">Reference Negara</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','NEGARA')]</field>
+            <field name="context">{'default_kode_master': 'NEGARA'}</field>
+        </record>
+
+        <!-- Action: KOTA -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_kota_action">
+            <field name="name">Reference Kota</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','KOTA')]</field>
+            <field name="context">{'default_kode_master': 'KOTA'}</field>
+        </record>
+
+        <!-- Action: PROVINSI -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_provinsi_action">
+            <field name="name">Reference Provinsi</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','PROVINSI')]</field>
+            <field name="context">{'default_kode_master': 'PROVINSI'}</field>
+        </record>
+
+        <!-- Action: PELABUHAN -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_pelabuhan_action">
+            <field name="name">Reference Pelabuhan</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','PELABUHAN')]</field>
+            <field name="context">{'default_kode_master': 'PELABUHAN'}</field>
+        </record>
+
+        <!-- Action: JENIS_IDENTITAS -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_jenis_identitas_action">
+            <field name="name">Reference Jenis Identitas</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','JENIS_IDENTITAS')]</field>
+            <field name="context">{'default_kode_master': 'JENIS_IDENTITAS'}</field>
+        </record>
+
+        <!-- Action: UKURAN_CONTAINER -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_ukuran_container_action">
+            <field name="name">Reference Ukuran Container</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','UKURAN_CONTAINER')]</field>
+            <field name="context">{'default_kode_master': 'UKURAN_CONTAINER'}</field>
+        </record>
+
+        <!-- Action: JENIS_CONTAINER -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_jenis_container_action">
+            <field name="name">Reference Jenis Container</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','JENIS_CONTAINER')]</field>
+            <field name="context">{'default_kode_master': 'JENIS_CONTAINER'}</field>
+        </record>
+
+        <!-- Action: UKURAN_KEMASAN -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_ukuran_kemasan_action">
+            <field name="name">Reference Ukuran Kemasan</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','UKURAN_KEMASAN')]</field>
+            <field name="context">{'default_kode_master': 'UKURAN_KEMASAN'}</field>
+        </record>
+
+        <!-- Action: KATEGORI_BARANG -->
+        <record model="ir.actions.act_window" id="dps_reference_agen_kategori_barang_action">
+            <field name="name">Reference Kategori Barang</field>
+            <field name="res_model">dps.reference.agen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kode_master','=','KATEGORI_BARANG')]</field>
+            <field name="context">{'default_kode_master': 'KATEGORI_BARANG'}</field>
+        </record>
+    </data>
+</odoo>

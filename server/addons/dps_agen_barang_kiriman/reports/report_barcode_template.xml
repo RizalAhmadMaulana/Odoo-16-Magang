@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_assets_common_custom_fonts" name="Custom QWeb fonts" inherit_id="web.report_layout">
+        <xpath expr="//head" position="inside">
+            <link href="/dps_agen_barang_kiriman/static/src/less/fonts.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+        <template id="print_barcode_report_view">
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="o.kemasan_ids" t-as="ids">
+                <t t-call="web.basic_layout">
+                    <div class="page" >
+                        <span style="margin-left:-130px;"><img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('Code128', ids.name , 800, 150)" /></span>
+                        <h1 class="text-center" style="font-size: 55px;font-weight: bold;font-family: RobotoMono;"><span t-field="ids.name"/></h1>
+                        <!-- <hr style="border-top: 3px solid"/> -->
+                        <br />
+                        <table style="width: 100%;font-family: RobotoMono;">
+                            <tr>
+                                <td  style="width: 23%;font-size: 21px">No. Box</td>
+                                <td  style="width: 9%"></td>
+                                <td  style="width: 68%;font-size: 21px"><span t-field="ids.name"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">Pengirim</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="o.nama_pengirim"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">No. Telp Pengirim</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="o.nomor_telepon_pengirim"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">Penerima</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="ids.nama_penerima"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">No. Telp</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="ids.nomor_telepon_penerima"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">Alamat</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="ids.alamat_penerima"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 21px">Kota</td>
+                                <td  ></td>
+                                <td  style="font-size: 21px"><span t-field="ids.kota_penerima"/></td>
+                            </tr>
+                            <tr>
+                                <td  style="font-size: 23px">Bruto</td>
+                                <td  ></td>
+                                <td  style="font-size: 23px"><span t-field="ids.bruto"/></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

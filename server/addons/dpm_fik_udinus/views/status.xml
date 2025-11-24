@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_status" model="ir.actions.act_window">
+            <field name="name">Status Keanggotaan</field>
+            <field name="res_model">status.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Tambahkan Status Keanggotaan Anda
+                </p>
+            </field>
+        </record>
+
+        <record id="view_status_tree" model="ir.ui.view">
+            <field name="name">Status Keanggotaan List</field>
+            <field name="model">status.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_status_form" model="ir.ui.view">
+            <field name="name">Status Keanggotaan Form</field>
+            <field name="model">status.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

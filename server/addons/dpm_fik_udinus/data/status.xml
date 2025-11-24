@@ -1,0 +1,13 @@
+<odoo>
+    <data noupdate="1">
+        <record id="status_anggota_aktif" model="status.dpm">
+            <field name="status">Anggota Aktif</field>
+        </record>
+        <record id="status_pengurus" model="status.dpm">
+            <field name="status">Pengurus</field>
+        </record>
+        <record id="status_pengawas" model="status.dpm">
+            <field name="status">Pengawas</field>
+        </record>
+    </data>
+</odoo>

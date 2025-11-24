@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kepengurusan,kepengurusan.dpm.access,model_kepengurusan_dpm,base.group_user,1,1,1,1
+access_status,status.dpm.access,model_status_dpm,base.group_user,1,1,1,1
+access_komisi_dpm,komisi.dpm.access,model_komisi_dpm,base.group_user,1,1,1,1
+access_proker_dpm,proker.dpm.access,model_proker_dpm,base.group_user,1,1,1,1
+access_periode_dpm,periode.dpm.access,model_periode_dpm,base.group_user,1,1,1,1
+access_sie_dpm,sie.dpm.access,model_sie_dpm,base.group_user,1,1,1,1
+access_proposal_dpm,proposal.dpm.access,model_proposal_dpm,base.group_user,1,1,1,1
+access_lpj_dpm,lpj.dpm.access,model_lpj_dpm,base.group_user,1,1,1,1

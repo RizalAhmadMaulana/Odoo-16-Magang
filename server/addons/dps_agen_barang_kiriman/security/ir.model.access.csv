@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dps_agen_barkir,access.dps.agen.barkir,model_dps_agen_barkir,base.group_user,1,1,1,1
+access_order_user,access.order.user,model_dps_barkir_order,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_barang_user,access.barang.user,model_dps_barkir_barang,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_kemasan_user,access.kemasan.user,model_dps_barkir_kemasan,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_container_user,access.container.user,model_dps_barkir_container,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_shipment_user,access.shipment.user,model_dps_barkir_shipment,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_reference_agen_user,access.reference.agen.user,model_dps_reference_agen,dps_agen_barang_kiriman.group_agen_user,1,1,1,1
+access_dps_partner,dps.partner.model,model_dps_partner,base.group_user,1,1,1,1
+access_dps_pricelist,dps.pricelist.model,model_dps_pricelist,base.group_user,1,1,1,1
+access_dps_pricelist_line,dps.pricelist_line.model,model_dps_pricelist_line,base.group_user,1,1,1,1
+access_nvocc_manifes,NVOCC Manifes Access,model_dps_nvocc,base.group_user,1,1,1,1
+access_nvocc_master_bl,NVOCC Master BL Access,model_dps_nvocc_master_bl,base.group_user,1,1,1,1
+access_nvocc_host_bl,NVOCC Host BL Access,model_dps_nvocc_bl,base.group_user,1,1,1,1
+access_nvocc_hs_code,NVOCC HS Code Access,model_dps_nvocc_bl_hs,base.group_user,1,1,1,1
+access_nvocc_petikemas,NVOCC Petikemas Access,model_dps_nvocc_container,base.group_user,1,1,1,1
+access_nvocc_kelompok_pos,NVOCC Kelompok Pos Access,model_dps_nvocc_kelompok_pos,base.group_user,1,1,1,1

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="dps_pricelist_form_view" model="ir.ui.view">
+            <field name="name">dps.pricelist.form</field>
+            <field name="model">dps.pricelist</field>
+            <field name="arch" type="xml">
+                <form string="Pricelist Partner">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="agen_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="partner_id" options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Item Pricelist">
+                                <field name="pricelist_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="ukuran_kemasan_id"/>
+                                        <field name="harga"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="dps_pricelist_tree_view" model="ir.ui.view">
+            <field name="name">dps.pricelist.tree</field>
+            <field name="model">dps.pricelist</field>
+            <field name="arch" type="xml">
+                <tree string="Daftar Pricelist">
+                    <field name="name"/>
+                    <field name="agen_id"/>
+                    <field name="partner_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dps_pricelist_action" model="ir.actions.act_window">
+            <field name="name">Pricelist Partner</field>
+            <field name="res_model">dps.pricelist</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Buat Pricelist Partner baru Anda!
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

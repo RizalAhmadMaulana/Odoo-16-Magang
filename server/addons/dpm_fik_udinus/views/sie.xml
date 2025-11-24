@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="action_sie" model="ir.actions.act_window">
+            <field name="name">Struktur Sie</field>
+            <field name="res_model">sie.dpm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Tambahkan Struktur Sie Dalam DPM FIK
+                </p>
+            </field>
+        </record> 
+
+        <record id="view_sie_tree" model="ir.ui.view">
+            <field name="name">Struktur Sie</field>
+            <field name="model">sie.dpm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="struktur_sie"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sie_form" model="ir.ui.view">
+            <field name="name">Struktur_sie</field>
+            <field name="model">sie.dpm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="struktur_sie"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

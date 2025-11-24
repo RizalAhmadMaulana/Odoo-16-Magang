@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="agen_root" name="Agen Barkir" web_icon="dps_agen_barang_kiriman,static/img/logo_oneerp.png" sequence="1" action="dps_barkir_container_action" groups="dps_agen_barang_kiriman.group_agen_user"/>
+
+		<!--level 1-->
+		<menuitem id="order_menu" name="Order" parent="agen_root" action="dps_barkir_order_action" sequence="10" groups="dps_agen_barang_kiriman.group_agen_user" />
+		<menuitem id="shipment_menu" name="Shipment" parent="agen_root" action="dps_barkir_order_action" sequence="20" groups="dps_agen_barang_kiriman.group_agen_user" />
+		<menuitem id="reference_agen_menu" name="Reference" parent="agen_root" sequence="80" groups="dps_agen_barang_kiriman.group_agen_user" />
+		<menuitem id="partner_management_menu" name="Partner Management" parent="agen_root" sequence="30" groups="dps_agen_barang_kiriman.group_agen_user" />
+		<menuitem id="nvocc_root_menu" name="NVOCC" parent="agen_root" sequence="40" groups="dps_agen_barang_kiriman.group_agen_user" />
+
+		<!--level 2 partner-->
+		<menuitem id="submenu_dps_partner" name="Partners" parent="partner_management_menu" action="dps_partner_action" sequence="10" groups="dps_agen_barang_kiriman.group_agen_user"/>
+       	<menuitem id="submenu_dps_pricelist" name="Pricelists" parent="partner_management_menu" action="dps_pricelist_action" sequence="20" groups="dps_agen_barang_kiriman.group_agen_user"/>
+
+		<!--level 2 shipment-->
+		<menuitem id="submenu_dps_barkir_shipment" name="Data Shipment" parent="shipment_menu" action="dps_barkir_shipment_action" sequence="21"/>
+		<menuitem id="submenu_dps_barkir_container" name="Data Kontainer" parent="shipment_menu" action="dps_barkir_container_action" sequence="22"/>
+		<menuitem id="submenu_dps_barkir_kemasan" name="Data Kemasan" parent="shipment_menu" action="dps_barkir_kemasan_action" sequence="23"/>
+
+		<!--level 2 reference -->
+		<menuitem id="submenu_dps_reference_agen_negara" name="Reference Negara" parent="reference_agen_menu" action="dps_reference_agen_negara_action" sequence="81"/>
+		<menuitem id="submenu_dps_reference_agen_kota" name="Reference Kota" parent="reference_agen_menu" action="dps_reference_agen_kota_action" sequence="82"/>
+		<menuitem id="submenu_dps_reference_agen_provinsi" name="Reference Provinsi" parent="reference_agen_menu" action="dps_reference_agen_provinsi_action" sequence="83"/>
+		<menuitem id="submenu_dps_reference_agen_pelabuhan" name="Reference Pelabuhan" parent="reference_agen_menu" action="dps_reference_agen_pelabuhan_action" sequence="84"/>
+		<menuitem id="submenu_dps_reference_agen_jenis_identitas" name="Reference Jenis Identitas" parent="reference_agen_menu" action="dps_reference_agen_jenis_identitas_action" sequence="85"/>
+		<menuitem id="submenu_dps_reference_agen_ukuran_container" name="Reference Ukuran Container" parent="reference_agen_menu" action="dps_reference_agen_ukuran_container_action" sequence="86"/>
+		<menuitem id="submenu_dps_reference_agen_jenis_container" name="Reference Jenis Container" parent="reference_agen_menu" action="dps_reference_agen_jenis_container_action" sequence="87"/>
+		<menuitem id="submenu_dps_reference_agen_ukuran_kemasan" name="Reference Ukuran Kemasan" parent="reference_agen_menu" action="dps_reference_agen_ukuran_kemasan_action" sequence="88"/>
+		<menuitem id="submenu_dps_reference_agen_kategori_barang" name="Reference Kategori Barang" parent="reference_agen_menu" action="dps_reference_agen_kategori_barang_action" sequence="89"/>
+		<menuitem id="submenu_dps_reference_agen_barkir" name="Reference Agen" parent="reference_agen_menu" action="dps_agen_barkir_action" sequence="90"/>
+
+		<!--level 2 nvocc-->
+		<menuitem id="submenu_nvocc_manifes" name="Nvocc Manifes" parent="nvocc_root_menu" action="action_nvocc_manifes" sequence="10"/>
+        <menuitem id="submenu_nvocc_kelompok_pos" name="Kelompok Pos" parent="nvocc_root_menu" action="action_nvocc_kelompok_pos" sequence="20"/>
+        <menuitem id="submenu_nvocc_master_bl" name="Master B/L" parent="nvocc_root_menu" action="action_nvocc_master_bl" sequence="30"/>
+        <menuitem id="submenu_nvocc_data_bl" name="Data B/L" parent="nvocc_root_menu" action="action_nvocc_host_bl" sequence="40"/>
+        <menuitem id="submenu_nvocc_detil_hs_code" name="Detil HS Code" parent="nvocc_root_menu" action="action_nvocc_hs_code" sequence="50"/>
+        <menuitem id="submenu_nvocc_detil_petikemas" name="Detil Petikemas Terangkut" parent="nvocc_root_menu" action="action_nvocc_petikemas" sequence="60"/>
+	</data>
+</odoo>

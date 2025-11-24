@@ -1,0 +1,12 @@
+// This file is meant to be edited automatically by the user. The variables it
+// contains should not be renamed otherwise it would break existing customers
+// customizations.
+
+$o-user-website-values: map-merge($o-user-website-values, o-map-omit((
+    'header-template': 'default',
+    'hamburger-position': 'right',
+    'header-scroll-effect': 'fixed',
+    'footer-gradient': 'NULL',
+    'footer-effect': null,
+    // -- hook --
+)));
